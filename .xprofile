@@ -1,0 +1,12 @@
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+fcitx -rd &
+echo 1 | sudo tee /sys/class/leds/tpacpi::kbd_backlight/brightness &
+exec syndaemon -i 0.8 -t -k &
+urxvtd --quiet --fork --opendisplay &
+xss-lock -- $HOME/.config/lock.sh &
+xrdb ~/.Xresources
+wal -R -a 80 &
+$HOME/.screenlayout/defaults.sh &
+#nitrogen --restore
